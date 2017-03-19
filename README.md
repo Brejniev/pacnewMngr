@@ -15,7 +15,7 @@ Voici le procédé actuellement mis en oeuvre :
 2. on demande à l'utilisateur si il souhaite remplacer le fichier courant par le fichier  .pacnew
 3. si la réponse est oui on remplace le fichier courant par le fichier .pacnew (le fichier remplacé est renommé avec l'extension '.pacold' et on passe à l'étape  suivante, sinon propose à l'utilisateur de supprimer le fichier .pacnew et on termine le traitement pour ce fichier.
 4. une fois le fichier remplacé on demande à l'utilisateur si il souhaite éditer le nouveau fichier courant (ancien fichier .pacnew)
-5. si la réponse est oui on ouvre le fichier avec vim, sinon le traitement est terminé pour ce fichier
+5. si la réponse est oui on ouvre le fichier avec `vim`, sinon le traitement est terminé pour ce fichier
 
 ## Configuration de base
 
