@@ -34,7 +34,7 @@ static char *argsFind[] = { progFind, searchDirectory, "-name", "*.pacnew", NULL
 // rm :
 // the binary and arguments for the 'rm' command.
 #define progRm "/usr/bin/rm"
-static char *argsRm[] = { progRm, tmpFileName, NULL };
+static char *argsRm[] = { progRm, NULL, NULL };
 
 // diff :
 // the binary and arguments for the 'diff' command.
@@ -149,6 +149,7 @@ int main( int argc, char *argv[], char *envp[] ) {
 	fprintf( stderr, "Fermeture du fichier temporaire ... \n" );
 	fclose(tmp);
 	fprintf( stderr, "Suppression du fichier temporaire ... \n" );
+	argsRm[1] = tmpFileName;
 	execute( progRm, argsRm, -1 );
 	fprintf( stderr, "Fin du programme.\n" );
 	
@@ -179,13 +180,24 @@ void process_pacnewFile( char *pacnewFile, int n ) {
 	printf( "\nreplace ? [y/N] " );
 	ans = readChar();
 	if( !testAns(ans) ) {
-	// If not : this is the end of this process.
+	// If not : Ask the user if he/she wants to remove the .pacnew file.
+		printf( "\nremove ? [y/N] " );
+		ans = readChar();
+		if( testAns(ans) ) {
+		// If yes : remove the .pacnew file.
+			argsRm[1] = pacnewFile;
+			execute( progRm, argsRm, -1 );
+		}
 		goto End;
 	}
 	
 	// If yes : proceed with the replacement
 	strcpy( pacoldFile, currentFile );
 	strcat( pacoldFile, ".pacold" );
+	if( !access( pacoldFile, F_OK ) ) {
+		argsRm[1] = pacoldFile;
+		execute( progRm, argsRm, -1 );
+	}
 	argsMv[1] = currentFile;
 	argsMv[2] = pacoldFile;
 	execute( progMv, argsMv, -1 );
