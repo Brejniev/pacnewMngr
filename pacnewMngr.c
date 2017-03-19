@@ -168,13 +168,13 @@ void process_pacnewFile( char *pacnewFile, int n ) {
 	
 	printf( "fichier : %s\n\n", pacnewFile );
 	
-	// Show the difference between the actual file and the 
+	// Show the difference between the current file and the 
 	// .pacnew file using the command 'diff'.
 	argsDiff[1] = pacnewFile;
 	argsDiff[2] = currentFile;
 	execute( progDiff, argsDiff, -1 );
 	
-	// Ask the user if he/she wants to replace the actual file 
+	// Ask the user if he/she wants to replace the current file 
 	// by the corresponding .pacnew file.
 	printf( "\nreplace ? [y/N] " );
 	ans = readChar();
@@ -194,7 +194,7 @@ void process_pacnewFile( char *pacnewFile, int n ) {
 	execute( progMv, argsMv, -1 );
 	printf( "replacement done.\n" );
 	
-	// Ask the user if he/she wants to edit the new actual file
+	// Ask the user if he/she wants to edit the new current file
 	// (which is the former .pacnew file)
 	printf( "\nedit new file ? [y/N] " );
 	ans = readChar();
@@ -203,7 +203,7 @@ void process_pacnewFile( char *pacnewFile, int n ) {
 		goto End;
 	}
 	
-	// If yes : open the new actual file with vim.
+	// If yes : open the new current file with vim.
 	argsVim[1] = currentFile;
 	execute( progVim, argsVim, -1 );
 	
