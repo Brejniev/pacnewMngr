@@ -1,3 +1,5 @@
+/* --~.o°°o°O\ PACNEW MANAGER /O°o°°o.~-- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
